@@ -1,0 +1,25 @@
+version: '3'
+services:
+    node1:
+        image: cassandra:latest
+        networks:
+            - dbNetwork
+        environment:
+            - CASSANDRA_CLUSTER_NAME=dev_cluster
+            - CASSANDRA_SEEDS=node1
+        ports:
+            - 9042:9042
+    node2:
+        image: cassandra:latest
+        networks:
+            - dbNetwork
+        environment:
+            - CASSANDRA_CLUSTER_NAME=dev_cluster
+            - CASSANDRA_SEEDS=node1
+        depends_on:
+              - node1
+        ports:
+            - 9142:9042
+networks:
+    dbNetwork:
+        driver: bridge

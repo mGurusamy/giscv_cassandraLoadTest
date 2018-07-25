@@ -1,0 +1,19 @@
+
+// create a keyspace/database in cassandra
+create keyspace policydb with replication = {'class' : 'SimpleStrategy', 'replication_factor': 2};
+
+// make cassandra to use the above created keyspace/database
+use policydb;
+
+// create a column family/tables in the above keyspace
+create table policy(policyId int, firstName text, lastName text, insuredAddress text, coverStartDate date, coverEndDate date, scheduleAvailable boolean, primary key(policyId));
+
+// node mock data generator using csv test data generator model
+node generator.js 'seq, first, last, street, date(3), date(3), bool' 200000 ../outputData/policyMock.csv
+
+// use docker copy from local host to cassandra container
+docker cp csv_file_path cassandra_container:/ destination_path_for_csv_file
+
+// Bulk loading using copy option
+copy policy (policyId, firstName, lastName, insuredAddress, coverStartDate, coverEndDate, scheduleAvailable)
+from '/1m.csv' with HEADER = FALSE;

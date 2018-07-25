@@ -1,0 +1,21 @@
+{
+  "name": "giscv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Manoharan Gurusamy",
+  "license": "ISC",
+  "dependencies": {
+    "cassandra-driver": "^3.5.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "nodemon": "^1.18.3"
+  }
+}
